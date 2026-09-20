@@ -10,9 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="レストラン">
 
-    <!-- 💡 あなたの画像URLを直接フルアドレスで指定して、iPhoneに強制認識させます -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://github.io">
-    <link rel="apple-touch-icon" href="https://github.io">
+    <!-- 💡 IMG_3693.jpeg を指定し、?v=4 でキャッシュを強制更新 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="IMG_3693.jpeg?v=4">
+    <link rel="apple-touch-icon" href="IMG_3693.jpeg?v=4">
 
     <!-- 🤖 Android用アプリ化設定 -->
     <link rel="manifest" href="manifest.json">
@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /* 擬似要素でソウルスカイの背景画像を半透明(35%)にする */
+        /* 擬似要素で背景画像を半透明(35%)にする */
         body::before {
             content: "";
             position: fixed;
