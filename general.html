@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一般メニュー - レストラン</title>
+    <title>メニュー(全て税込) - レストラン</title>
     <style>
         html, body { margin: 0; padding: 0; min-height: 100vh; }
         body { 
             font-family: sans-serif; color: #333; line-height: 1.6; text-align: center; 
             background-image: url('IMG_3693.jpeg'); background-attachment: fixed; background-size: cover; background-position: center; background-repeat: no-repeat;
         }
-        header { background: rgba(139, 69, 19, 0.9); color: white; padding: 30px 20px; }
+        /* ヘッダーを水色系に変更 */
+        header { background: rgba(30, 144, 255, 0.88); color: white; padding: 30px 20px; }
         main { padding: 30px 20px; max-width: 600px; margin: 30px auto; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 16px; text-align: left; }
-        .menu-item { border-bottom: 1px dashed #ddd; padding: 15px 0; display: flex; justify-content: space-between; font-weight: bold; }
-        .back-btn { display: inline-block; margin-top: 25px; background: #5c2e0b; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .menu-item { border-bottom: 1px dashed #b0e0e6; padding: 15px 0; display: flex; justify-content: space-between; font-weight: bold; }
+        /* 戻るボタンを水色・ネイビー系に変更 */
+        .back-btn { display: inline-block; margin-top: 25px; background: #0077b6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .back-btn:hover { background: #005f9e; }
     </style>
 </head>
 <body>
-    <header><h1>一般メニュー</h1></header>
+    <header><h1>メニュー(全て税込)</h1></header>
     <main>
+        <!-- 白米 -->
         <div class="menu-item">
             <span>白米（ごはん）</span>
             <span>200円</span>
         </div>
-        <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">※ほかほかの炊きたてご飯をお届けします。</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 5px; margin-bottom: 15px;">※ほかほかの炊きたてご飯をお届けします。</p>
+
+        <!-- えすかるご焼き -->
+        <div class="menu-item">
+            <span>えすかるご焼き</span>
+            <span>700円</span>
+        </div>
+
+        <!-- 純豆腐チゲ -->
+        <div class="menu-item">
+            <span>純豆腐チゲ</span>
+            <span>1250円</span>
+        </div>
+
+        <!-- 韓国海苔5枚 -->
+        <div class="menu-item">
+            <span>韓国海苔5枚</span>
+            <span>250円</span>
+        </div>
+
+        <!-- みかんジュース -->
+        <div class="menu-item">
+            <span>みかんジュース</span>
+            <span>400円</span>
+        </div>
+
         <div style="text-align: center;">
             <a href="index.html" class="back-btn"> メニュー一覧へ戻る</a>
         </div>
