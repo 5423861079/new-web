@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レストラン</title>
+    <link rel="manifest" href="manifest.json">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
@@ -34,7 +35,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); text-align: left; 
         }
 
-        /* メニュー（夜・黒ベース設定） */
         .card.dark {
             background: rgba(26, 30, 38, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -51,7 +51,6 @@
         .btn-dark { background: #1f2937; color: white; }
         .btn-green { background: #388e3c; color: white; }
 
-        /* メニューアイテム表示スタイル */
         .menu-item { 
             background: rgba(255, 255, 255, 0.9);
             border-radius: 12px; padding: 16px 20px; 
@@ -65,6 +64,11 @@
             color: #fff;
         }
         .dark .price { color: #60a5fa; }
+
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+        .info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
+        .info-table th { text-align: left; width: 35%; color: #555; }
+        .info-table td { text-align: right; font-weight: bold; }
 
         .note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
         .hidden { display: none; }
@@ -86,7 +90,17 @@
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">スマホアプリのように使う</h2>
             <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加すると、次回からアプリ感覚ですぐにメニューを開けます。</p>
-            <button class="btn btn-green">📱 ホーム画面への追加方法</button>
+            <button class="btn btn-green" id="installBtn" onclick="installApp()">📱 ホーム画面への追加方法</button>
+        </main>
+
+        <!-- 復活した店舗情報ブロック -->
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
+            <table class="info-table">
+                <tr><th>営業時間</th><td>11:30 〜 21:00</td></tr>
+                <tr><th>住所</th><td>東京都渋谷区</td></tr>
+                <tr><th>電話番号</th><td>03-XXXX-XXXX</td></tr>
+            </table>
         </main>
     </div>
 
@@ -123,6 +137,27 @@
             document.getElementById('view-evening').classList.add('hidden');
             document.getElementById('view-' + viewName).classList.remove('hidden');
             window.scrollTo(0, 0);
+        }
+
+        /* PWA ホーム画面追加機能のコントロール */
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('【ホーム画面への追加方法】\n\n・iPhone (Safari) の場合:\n画面下の共有ボタン（□に↑）をタップし、「ホーム画面に追加」を選んでください。\n\n・Android (Chrome) の場合:\n右上の「⋮」メニューから「ホーム画面に追加」または「アプリをインストール」を選んでください。');
+            }
         }
     </script>
 </body>
