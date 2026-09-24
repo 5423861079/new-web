@@ -33,6 +33,16 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         header h1 { font-size: 1.35rem; font-weight: 700; }
+        /* サブタイトルのスタイル */
+        header .subtitle {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+        header.dark .subtitle {
+            color: #ccc;
+        }
 
         .card { 
             padding: 28px 20px; max-width: 500px; margin: 24px auto; 
@@ -136,9 +146,13 @@
 
     <!-- TOP画面 -->
     <div id="view-home">
-        <header><h1>レストラン</h1></header>
+        <header>
+            <h1>レストラン</h1>
+            <div class="subtitle">※このサイトはすべて架空です。 / *This website is entirely fictional.</div>
+        </header>
         <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お品書き（メニュー）</h2>
+            <!-- 変更箇所：「お品書き（メニュー）」を「メニュー」に変更 -->
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
             <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
             
             <button class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
@@ -163,7 +177,10 @@
 
     <!-- 昼メニュー画面 -->
     <div id="view-general" class="hidden">
-        <header><h1>メニュー (全て税込)</h1></header>
+        <header>
+            <h1>メニュー (全て税込)</h1>
+            <div class="subtitle">※このサイトはすべて架空です。 / *This website is entirely fictional.</div>
+        </header>
         <main class="card">
             <div class="menu-item"><span>白米（ごはん）</span><span>400円</span></div>
             <div class="menu-item"><span>えすかるご焼き</span><span>700円</span></div>
@@ -176,13 +193,16 @@
 
     <!-- 夜メニュー画面（黒ベース） -->
     <div id="view-evening" class="hidden">
-        <header class="dark"><h1>18:00以降メニュー(全て税込)</h1></header>
+        <header class="dark">
+            <h1>18:00以降メニュー(全て税込)</h1>
+            <div class="subtitle">※このサイトはすべて架空です。 / *This website is entirely fictional.</div>
+        </header>
         <main class="card dark">
             <div class="menu-item">
                 <span>夜限定食べ放題</span>
                 <span class="price">2,500円</span>
             </div>
-            <p class="note">※それ以外のメニューは、全ていつも通りです</p>
+            <p class="note">※それ以外のメニューは、全ているも通りです</p>
             <button class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
         </main>
     </div>
@@ -192,68 +212,36 @@
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
             <div class="modal-title">ホーム画面に追加</div>
-            <div class="modal-subtitle">ワンタップでアクセスできるようになります</div>
-            
+            <div class="modal-subtitle">アプリ感覚でいつでも素早く開けます</div>
             <div class="guide-list">
-                <!-- iPhone (Safari) 用案内 -->
-                <ol id="guide-ios">
-                    <li>画面下部の<b>共有ボタン</b>（<span style="font-size:1.1em;">⎋</span> / Safari）をタップ</li>
-                    <li>メニューから<b>「ホーム画面に追加」</b>を選択</li>
-                    <li>右上の<b>「追加」</b>をタップして完了</li>
-                </ol>
-                <!-- Android (Chrome) 用案内 -->
-                <ol id="guide-android" class="hidden">
-                    <li>画面右上の<b>メニューアイコン</b>（<b>⋮</b> / Chrome）をタップ</li>
-                    <li>メニューから<b>「ホーム画面に追加」</b>または<b>「アプリをインストール」</b>を選択</li>
-                    <li>画面の指示に従って<b>「追加」</b>をタップして完了</li>
+                <ol>
+                    <li>ブラウザのメニューから「ホーム画面に追加」をタップします。</li>
+                    <li>画面の指示に従って追加を完了してください。</li>
                 </ol>
             </div>
-
             <button class="btn-close" onclick="closeModal()">閉じる</button>
         </div>
     </div>
 
+    <!-- JavaScript処理（画面切り替えとモーダル制御） -->
     <script>
-        function showView(viewName) {
+        function showView(viewId) {
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-general').classList.add('hidden');
             document.getElementById('view-evening').classList.add('hidden');
-            document.getElementById('view-' + viewName).classList.remove('hidden');
+            
+            document.getElementById('view-' + viewId).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-
         function handleInstall() {
-            // Android等で標準のインストールダイアログが起動できる場合
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    deferredPrompt = null;
-                });
-            } else {
-                // 端末の判定 (Android か iPhone/iPad か)
-                const isAndroid = /Android/i.test(navigator.userAgent);
-                
-                if (isAndroid) {
-                    document.getElementById('guide-ios').classList.add('hidden');
-                    document.getElementById('guide-android').classList.remove('hidden');
-                } else {
-                    document.getElementById('guide-android').classList.add('hidden');
-                    document.getElementById('guide-ios').classList.remove('hidden');
-                }
-                
-                document.getElementById('installModal').classList.remove('hidden');
-            }
+            document.getElementById('installModal').classList.remove('hidden');
         }
 
         function closeModal() {
             document.getElementById('installModal').classList.add('hidden');
         }
     </script>
+
 </body>
 </html>
