@@ -56,9 +56,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
-<body>
-
-    <!-- TOP画面 -->
+<body><!-- TOP画面 -->
     <div id="view-home">
         <header>
             <h1>Nexus</h1>
@@ -85,12 +83,13 @@
         </main>
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <!-- 暗号化キーを設定したため、事前の認証メール確認なしで直接届きます -->
-            <form action="https://formsubmit.co" method="POST">
+            
+            <!-- photos0314@gmail.com に届くように送信先URLを修正 -->
+            <form action="https://formsubmit.co/photos0314@gmail.com" method="POST">
                 <input type="text" name="_honey" style="display:none">
                 
-                <!-- 送信完了後に自動的に元のページURL（トップ）に戻るための設定 -->
-                <input type="hidden" name="_next" value="">
+                <!-- 送信完了後に自動的に元のページURL（トップ）に戻るためのID設定 -->
+                <input type="hidden" name="_next" id="nextUrl" value="">
 
                 <div class="form-group">
                     <label>お名前<span class="required-badge">必須</span></label>
@@ -107,9 +106,7 @@
                 <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
             </form>
         </main>
-    </div>
-
-    <!-- 昼メニュー画面 -->
+    </div><!-- 昼メニュー画面 -->
     <div id="view-general" class="hidden">
         <header>
             <h1>メニュー (全て税込)</h1>
@@ -165,8 +162,15 @@
         function handleInstall() { document.getElementById('installModal').classList.remove('hidden'); }
         function closeModal() { document.getElementById('installModal').classList.add('hidden'); }
         
-        // フォーム送信後、自動的にこのページのURLに戻るようにするスクリプト
-        document.querySelector('input[name="_next"]').value = window.location.href;
+        // ページ読み込み完了時に安全にリダイレクトURLをセットする処理
+        window.addEventListener('DOMContentLoaded', function() {
+            var nextInput = document.getElementById('nextUrl');
+            if (nextInput) {
+                nextInput.value = window.location.href;
+            }
+        });
     </script>
 </body>
 </html>
+
+
