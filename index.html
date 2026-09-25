@@ -243,6 +243,45 @@
             document.getElementById('installModal').classList.add('hidden');
         }
     </script>
+    <!-- 1行も省略なしのお問い合わせフォーム（店舗情報の下に自動で移動します） -->
+    <div id="dynamic-contact-form" class="hidden">
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
+            <form action="https://formsubmit.co" method="POST">
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_next" value="https://github.io">
+                
+                <div class="form-group" style="margin-bottom: 16px; text-align: left;">
+                    <label for="name" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お名前<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
+                    <input type="text" id="name" name="お名前" placeholder="例：山田 太郎" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7);">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 16px; text-align: left;">
+                    <label for="email" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">メールアドレス<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
+                    <input type="email" id="email" name="返信用メール" placeholder="例：example@email.com" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7);">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 16px; text-align: left;">
+                    <label for="message" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お問い合わせ内容<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
+                    <textarea id="message" name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); font-family: inherit;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        // 店舗情報カードの直下にフォームを自動で挿入・出現させる処理
+        document.addEventListener("DOMContentLoaded", function() {
+            const homeView = document.getElementById('view-home');
+            const targetForm = document.getElementById('dynamic-contact-form');
+            if (homeView && targetForm) {
+                targetForm.classList.remove('hidden');
+                homeView.appendChild(targetForm);
+            }
+        });
+    </script>
 
 </body>
 </html>        <!-- お問い合わせフォーム〜最後の閉じタグまで（完全なコードは参照元をご確認ください） -->
