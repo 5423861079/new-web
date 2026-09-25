@@ -11,382 +11,50 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Nexus">
-
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            color: #333; line-height: 1.6; text-align: center;
-            background-image: url('IMG_3693.jpeg'); background-attachment: fixed; background-size: cover; background-position: center;
-            min-height: 100vh;
-            padding-bottom: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #333; line-height: 1.6; text-align: center; 
+            background-image: url('IMG_3693.jpeg'); background-attachment: fixed; background-size: cover; background-position: center; 
+            min-height: 100vh; padding-bottom: 40px; 
         }
-
-        header { 
-            background: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            padding: 24px 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        header.dark {
-            background: rgba(18, 22, 28, 0.85);
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 24px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        header.dark { background: rgba(18, 22, 28, 0.85); color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         header h1 { font-size: 1.35rem; font-weight: 700; }
-        /* サブタイトルのスタイル */
-        header .subtitle {
-            font-size: 0.75rem;
-            color: #666;
-            margin-top: 4px;
-            font-weight: normal;
-        }
-        header.dark .subtitle {
-            color: #ccc;
-        }
-
-        .card { 
-            padding: 28px 20px; max-width: 500px; margin: 24px auto; 
-            background: rgba(255, 255, 255, 0.88); 
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
-            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); text-align: left; 
-        }
-
-        .card.dark {
-            background: rgba(26, 30, 38, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #f0f0f0;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-        }
-
-        .btn {
-            display: block; width: 100%; padding: 14px 20px; margin-bottom: 12px;
-            font-size: 1rem; font-weight: bold; text-align: center; text-decoration: none;
-            border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s;
-        }
+        header .subtitle { font-size: 0.75rem; color: #666; margin-top: 4px; font-weight: normal; }
+        header.dark .subtitle { color: #ccc; }
+        .card { padding: 28px 20px; max-width: 500px; margin: 24px auto; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); text-align: left; }
+        .card.dark { background: rgba(26, 30, 38, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); color: #f0f0f0; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); }
+        .btn { display: block; width: 100%; padding: 14px 20px; margin-bottom: 12px; font-size: 1rem; font-weight: bold; text-align: center; text-decoration: none; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; }
         .btn-blue { background: #3b71ca; color: white; }
         .btn-dark { background: #1f2937; color: white; }
-        .btn-green { background: #388e3c; color: white; }
-
-        .menu-item { 
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px; padding: 16px 20px; 
-            display: flex; justify-content: space-between; align-items: center;
-            font-weight: bold; margin-bottom: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-        }
-        .dark .menu-item {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
+        .btn-green { background: #388e3c; color: white; }        .menu-item { background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); color: #333; }
+        .dark .menu-item { background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
         .dark .price { color: #60a5fa; }
-
         .info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
         .info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
         .info-table th { text-align: left; width: 35%; color: #555; }
         .info-table td { text-align: right; font-weight: bold; }
-
         .note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
         .hidden { display: none !important; }
-
-        /* ポップアップモーダル */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; padding: 20px;
-        }
-        .modal-content {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 32px 24px 24px 24px;
-            max-width: 360px; width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.25s ease-out;
-        }
-        .app-icon {
-            width: 72px; height: 72px; border-radius: 18px;
-            object-fit: cover; margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        }
-        .modal-title {
-            font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 6px;
-        }
-        .modal-subtitle {
-            font-size: 0.85rem; color: #64748b; margin-bottom: 20px;
-        }
-        .guide-list {
-            text-align: left; font-size: 0.88rem; color: #334155;
-            line-height: 1.7; margin-bottom: 24px;
-        }
-        .guide-list ol {
-            padding-left: 0; list-style-position: inside;
-        }
-        .guide-list li {
-            margin-bottom: 8px;
-        }
-        .btn-close {
-            background: #f1f5f9; color: #475569; border: none;
-            width: 100%; padding: 12px; border-radius: 12px;
-            font-size: 0.95rem; font-weight: bold; cursor: pointer;
-            transition: background 0.2s;
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+        .modal-content { background: #ffffff; border-radius: 24px; padding: 32px 24px 24px 24px; max-width: 360px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); animation: fadeIn 0.25s ease-out; }
+        .app-icon { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .modal-title { font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 6px; }
+        .modal-subtitle { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; }
+        .guide-list { text-align: left; font-size: 0.88rem; color: #334155; line-height: 1.7; margin-bottom: 24px; }
+        .guide-list ol { padding-left: 0; list-style-position: inside; }
+        .guide-list li { margin-bottom: 8px; }
+        .btn-close { background: #f1f5f9; color: #475569; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
         .btn-close:active { background: #e2e8f0; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .form-group { margin-bottom: 16px; text-align: left; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; font-family: inherit; background: rgba(255,255,255,0.7); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #3b71ca; background: rgba(255,255,255,1); }
+        .required-badge { background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
-</head>
-<body>
-
-    <!-- TOP画面 -->
-    <div id="view-home">
-        <header>
-            <h1>Nexus</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.
-</div>
-        </header>
-        <main class="card">
-            <!-- 変更箇所：「お品書き（メニュー）」を「メニュー」に変更 -->
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
-            
-            <button class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
-            <button class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
-        </main>
-
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加すると、次回からアプリ感覚ですぐにメニューを開けます。</p>
-            <button class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
-        </main>
-
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
-            <table class="info-table">
-                <tr><th>営業時間</th><td>11:30 〜 21:00</td></tr>
-                <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
-                <tr><th>電話番号</th><td>045-089-2786</td></tr>
-            </table>
-        </main>
-    </div>
-
-    <!-- 昼メニュー画面 -->
-    <div id="view-general" class="hidden">
-        <header>
-            <h1>メニュー (全て税込)</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card">
-            <div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
-            <div class="menu-item"><span>えすかるご焼き</span><span>700円</span></div>
-            <div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
-            <div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
-            <div class="menu-item"><span>みかんジュース</span><span>400円</span></div>
-            <button class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
-        </main>
-    </div>
-
-    <!-- 夜メニュー画面（黒ベース） -->
-    <div id="view-evening" class="hidden">
-        <header class="dark">
-            <h1>18:00以降メニュー(全て税込)</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card dark">
-            <div class="menu-item">
-                <span>夜限定食べ放題</span>
-                <span class="price">2,500円</span>
-            </div>
-            <p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
-            <button class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
-        </main>
-    </div>
-
-    <!-- ホーム画面追加案内のポップアップモーダル -->
-    <div id="installModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
-            <div class="modal-title">ホーム画面に追加</div>
-            <div class="modal-subtitle">アプリ感覚でいつでも素早く開けます。</div>
-            <div class="guide-list">
-                <ol>
-                    <li>ブラウザのメニューから「ホーム画面に追加」をタップします。</li>
-                    <li>画面の指示に従って追加を完了してください。</li>
-                </ol>
-            </div>
-            <button class="btn-close" onclick="closeModal()">閉じる</button>
-        </div>
-    </div>
-
-    <!-- JavaScript処理（画面切り替えとモーダル制御） -->
-        <!-- JavaScript処理（画面切り替えとモーダル制御） -->
-    <script>
-        // 一般メニュー・夜メニューの切り替え機能を完全に復活
-        function showView(viewId) {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-general').classList.add('hidden');
-            document.getElementById('view-evening').classList.add('hidden');
-            
-            document.getElementById('view-' + viewId).classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        // PWAモーダルの制御
-        function handleInstall() {
-            document.getElementById('installModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('installModal').classList.add('hidden');
-        }
-    </script>
-
-    <!-- お問い合わせフォーム（店舗情報の下に自動で安全に移動します） -->
-    <div id="dynamic-contact-form" class="hidden">
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px; font-weight: bold; color: #333;">お問い合わせ</h2>
-            <form action="https://formsubmit.co" method="POST">
-                <!-- スパム防止 -->
-                <input type="text" name="_honey" style="display:none">
-                <!-- 送信後に自身のサイトに戻す設定 -->
-                <input type="hidden" name="_next" value="https://github.io">
-                
-                <div class="form-group" style="margin-bottom: 16px; text-align: left;">
-                    <label for="name" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お名前<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                    <input type="text" id="name" name="お名前" placeholder="例：鈴木　蓮" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); -webkit-appearance: none;">
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 16px; text-align: left;">
-                    <label for="email" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">メールアドレス<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                    <input type="email" id="email" name="返信用メール" placeholder="例：example@email.com" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); -webkit-appearance: none;">
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 16px; text-align: left;">
-                    <label for="message" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お問い合わせ内容<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                    <textarea id="message" name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); font-family: inherit; -webkit-appearance: none; resize: vertical;"></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
-            </form>
-        </main>
-    </div>
-
-    <script>
-        // 重複エラーを無くし、店舗情報カードの直下にフォームを安全に移動させる処理
-        document.addEventListener("DOMContentLoaded", function() {
-            var homeView = document.getElementById('view-home');
-            var targetForm = document.getElementById('dynamic-contact-form');
-            if (homeView && targetForm) {
-                targetForm.classList.remove('hidden');
-                homeView.appendChild(targetForm);
-            }
-        });
-    </script>
-
-</body>
-</html>        .info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-        .info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
-        .info-table th { text-align: left; width: 35%; color: #555; }
-        .info-table td { text-align: right; font-weight: bold; }
-
-        .note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
-        .hidden { display: none !important; }
-
-        /* ポップアップモーダル */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; padding: 20px;
-        }
-        .modal-content {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 32px 24px 24px 24px;
-            max-width: 360px; width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.25s ease-out;
-        }
-        .app-icon {
-            width: 72px; height: 72px; border-radius: 18px;
-            object-fit: cover; margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        }
-        .modal-title {
-            font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 6px;
-        }
-        .modal-subtitle {
-            font-size: 0.85rem; color: #64748b; margin-bottom: 20px;
-        }
-        .guide-list {
-            text-align: left; font-size: 0.88rem; color: #334155;
-            line-height: 1.7; margin-bottom: 24px;
-        }
-        .guide-list ol {
-            padding-left: 0; list-style-position: inside;
-        }
-        .guide-list li {
-            margin-bottom: 8px;
-        }
-        .btn-close {
-            background: #f1f5f9; color: #475569; border: none;
-            width: 100%; padding: 12px; border-radius: 12px;
-            font-size: 0.95rem; font-weight: bold; cursor: pointer;
-            transition: background 0.2s;
-        }
-        .btn-close:active { background: #e2e8f0; }
-
-        /* お問い合わせフォーム用CSS */
-        .form-group {
-            margin-bottom: 16px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 6px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(0,0,0,0.15);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            background: rgba(255,255,255,0.7);
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #3b71ca;
-            background: rgba(255,255,255,1);
-        }
-        .required-badge {
-            background: #ef4444;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
+</head><body>
 
     <!-- TOP画面 -->
     <div id="view-home">
@@ -397,17 +65,14 @@
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
             <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
-            
             <button class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
             <button class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
         </main>
-
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う</h2>
             <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加すると、次回からアプリ感覚ですぐにメニューを開けます。</p>
             <button class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
         </main>
-
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
             <table class="info-table">
@@ -415,34 +80,28 @@
                 <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
                 <tr><th>電話番号</th><td>045-089-2786</td></tr>
             </table>
-        </main>        <!-- お問い合わせフォーム -->
+        </main>
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
             <form action="https://formsubmit.co" method="POST">
                 <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_next" value="https://github.io">
-                
                 <div class="form-group">
                     <label>お名前<span class="required-badge">必須</span></label>
                     <input type="text" name="お名前" placeholder="例：鈴木 蓮" required>
                 </div>
-                
                 <div class="form-group">
                     <label>メールアドレス<span class="required-badge">必須</span></label>
                     <input type="email" name="返信用メール" placeholder="例：example@email.com" required>
                 </div>
-                
                 <div class="form-group">
                     <label>お問い合わせ内容<span class="required-badge">必須</span></label>
                     <textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required></textarea>
                 </div>
-                
                 <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
             </form>
         </main>
-    </div>
-
-    <!-- 昼メニュー画面 -->
+    </div>    <!-- 昼メニュー画面 -->
     <div id="view-general" class="hidden">
         <header>
             <h1>メニュー (全て税込)</h1>
@@ -458,28 +117,25 @@
         </main>
     </div>
 
-    <!-- 夜メニュー画面（黒ベース） -->
+    <!-- 夜メニュー画面 -->
     <div id="view-evening" class="hidden">
         <header class="dark">
             <h1>18:00以降メニュー(全て税込)</h1>
             <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
         </header>
         <main class="card dark">
-            <div class="menu-item">
-                <span>夜限定食べ放題</span>
-                <span class="price">2,500円</span>
-            </div>
+            <div class="menu-item"><span>夜限定食べ放題</span><span class="price">2,500円</span></div>
             <p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
             <button class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
         </main>
     </div>
 
-    <!-- ホーム画面追加案内のポップアップモーダル -->
+    <!-- PWAモーダル -->
     <div id="installModal" class="modal-overlay hidden">
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
             <div class="modal-title">ホーム画面に追加</div>
-            <div class="modal-subtitle">アプリ感覚でいつでも素早く開けます。</div>
+            <div class="modal-subtitle">アプリ感覚でいつでも素快速く開けます。</div>
             <div class="guide-list">
                 <ol>
                     <li>ブラウザのメニューから「ホーム画面に追加」をタップします。</li>
@@ -490,247 +146,17 @@
         </div>
     </div>
 
-    <!-- JavaScript処理（画面切り替えとモーダル制御） -->
     <script>
         function showView(viewId) {
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-general').classList.add('hidden');
             document.getElementById('view-evening').classList.add('hidden');
-            
             document.getElementById('view-' + viewId).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
-
-        function handleInstall() {
-            document.getElementById('installModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('installModal').classList.add('hidden');
-        }
+        function handleInstall() { document.getElementById('installModal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('installModal').classList.add('hidden'); }
     </script>
-
-</body>
-</html>        .info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-        .info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
-        .info-table th { text-align: left; width: 35%; color: #555; }
-        .info-table td { text-align: right; font-weight: bold; }
-
-        .note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
-        .hidden { display: none !important; }
-
-        /* ポップアップモーダル */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; padding: 20px;
-        }
-        .modal-content {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 32px 24px 24px 24px;
-            max-width: 360px; width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.25s ease-out;
-        }
-        .app-icon {
-            width: 72px; height: 72px; border-radius: 18px;
-            object-fit: cover; margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        }
-        .modal-title {
-            font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 6px;
-        }
-        .modal-subtitle {
-            font-size: 0.85rem; color: #64748b; margin-bottom: 20px;
-        }
-        .guide-list {
-            text-align: left; font-size: 0.88rem; color: #334155;
-            line-height: 1.7; margin-bottom: 24px;
-        }
-        .guide-list ol {
-            padding-left: 0; list-style-position: inside;
-        }
-        .guide-list li {
-            margin-bottom: 8px;
-        }
-        .btn-close {
-            background: #f1f5f9; color: #475569; border: none;
-            width: 100%; padding: 12px; border-radius: 12px;
-            font-size: 0.95rem; font-weight: bold; cursor: pointer;
-            transition: background 0.2s;
-        }
-        .btn-close:active { background: #e2e8f0; }
-
-        /* お問い合わせフォーム用CSS */
-        .form-group {
-            margin-bottom: 16px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 6px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(0,0,0,0.15);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            background: rgba(255,255,255,0.7);
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #3b71ca;
-            background: rgba(255,255,255,1);
-        }
-        .required-badge {
-            background: #ef4444;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- TOP画面 -->
-    <div id="view-home">
-        <header>
-            <h1>Nexus</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
-            
-            <button class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
-            <button class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
-        </main>
-
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加すると、次回からアプリ感覚ですぐにメニューを開けます。</p>
-            <button class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
-        </main>
-
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
-            <table class="info-table">
-                <tr><th>営業時間</th><td>11:30 〜 21:00</td></tr>
-                <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
-                <tr><th>電話番号</th><td>045-089-2786</td></tr>
-            </table>
-        </main>        <!-- お問い合わせフォーム -->
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <form action="https://formsubmit.co" method="POST">
-                <input type="text" name="_honey" style="display:none">
-                <input type="hidden" name="_next" value="https://github.io">
-                
-                <div class="form-group">
-                    <label>お名前<span class="required-badge">必須</span></label>
-                    <input type="text" name="お名前" placeholder="例：鈴木 蓮" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>メールアドレス<span class="required-badge">必須</span></label>
-                    <input type="email" name="返信用メール" placeholder="例：example@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>お問い合わせ内容<span class="required-badge">必須</span></label>
-                    <textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
-            </form>
-        </main>
-    </div>
-
-    <!-- 昼メニュー画面 -->
-    <div id="view-general" class="hidden">
-        <header>
-            <h1>メニュー (全て税込)</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card">
-            <div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
-            <div class="menu-item"><span>えすかるご焼き</span><span>700円</span></div>
-            <div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
-            <div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
-            <div class="menu-item"><span>みかんジュース</span><span>400円</span></div>
-            <button class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
-        </main>
-    </div>
-
-    <!-- 夜メニュー画面（黒ベース） -->
-    <div id="view-evening" class="hidden">
-        <header class="dark">
-            <h1>18:00以降メニュー(全て税込)</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card dark">
-            <div class="menu-item">
-                <span>夜限定食べ放題</span>
-                <span class="price">2,500円</span>
-            </div>
-            <p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
-            <button class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
-        </main>
-    </div>
-
-    <!-- ホーム画面追加案内のポップアップモーダル -->
-    <div id="installModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
-            <div class="modal-title">ホーム画面に追加</div>
-            <div class="modal-subtitle">アプリ感覚でいつでも素早く開けます。</div>
-            <div class="guide-list">
-                <ol>
-                    <li>ブラウザのメニューから「ホーム画面に追加」をタップします。</li>
-                    <li>画面の指示に従って追加を完了してください。</li>
-                </ol>
-            </div>
-            <button class="btn-close" onclick="closeModal()">閉じる</button>
-        </div>
-    </div>
-
-    <!-- JavaScript処理（画面切り替えとモーダル制御） -->
-    <script>
-        function showView(viewId) {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-general').classList.add('hidden');
-            document.getElementById('view-evening').classList.add('hidden');
-            
-            document.getElementById('view-' + viewId).classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        function handleInstall() {
-            document.getElementById('installModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('installModal').classList.add('hidden');
-        }
-    </script>
-
 </body>
 </html>
 
