@@ -225,7 +225,9 @@
     </div>
 
     <!-- JavaScript処理（画面切り替えとモーダル制御） -->
+        <!-- JavaScript処理（画面切り替えとモーダル制御） -->
     <script>
+        // 一般メニュー・夜メニューの切り替え機能を完全に復活
         function showView(viewId) {
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-general').classList.add('hidden');
@@ -235,6 +237,7 @@
             window.scrollTo(0, 0);
         }
 
+        // PWAモーダルの制御
         function handleInstall() {
             document.getElementById('installModal').classList.remove('hidden');
         }
@@ -243,27 +246,30 @@
             document.getElementById('installModal').classList.add('hidden');
         }
     </script>
-    <!-- 1行も省略なしのお問い合わせフォーム（店舗情報の下に自動で移動します） -->
+
+    <!-- お問い合わせフォーム（店舗情報の下に自動で安全に移動します） -->
     <div id="dynamic-contact-form" class="hidden">
         <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px; font-weight: bold; color: #333;">お問い合わせ</h2>
             <form action="https://formsubmit.co" method="POST">
+                <!-- スパム防止 -->
                 <input type="text" name="_honey" style="display:none">
+                <!-- 送信後に自身のサイトに戻す設定 -->
                 <input type="hidden" name="_next" value="https://github.io">
                 
                 <div class="form-group" style="margin-bottom: 16px; text-align: left;">
                     <label for="name" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お名前<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                    <input type="text" id="name" name="お名前" placeholder="例：山田 太郎" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7);">
+                    <input type="text" id="name" name="お名前" placeholder="例：山田 太郎" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); -webkit-appearance: none;">
                 </div>
                 
                 <div class="form-group" style="margin-bottom: 16px; text-align: left;">
                     <label for="email" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">メールアドレス<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                    <input type="email" id="email" name="返信用メール" placeholder="例：example@email.com" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7);">
+                    <input type="email" id="email" name="返信用メール" placeholder="例：example@email.com" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); -webkit-appearance: none;">
                 </div>
                 
                 <div class="form-group" style="margin-bottom: 16px; text-align: left;">
                     <label for="message" style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お問い合わせ内容<span class="required-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                    <textarea id="message" name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); font-family: inherit;"></textarea>
+                    <textarea id="message" name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.7); font-family: inherit; -webkit-appearance: none; resize: vertical;"></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
@@ -272,10 +278,10 @@
     </div>
 
     <script>
-        // 店舗情報カードの直下にフォームを自動で挿入・出現させる処理
+        // 重複エラーを無くし、店舗情報カードの直下にフォームを安全に移動させる処理
         document.addEventListener("DOMContentLoaded", function() {
-            const homeView = document.getElementById('view-home');
-            const targetForm = document.getElementById('dynamic-contact-form');
+            var homeView = document.getElementById('view-home');
+            var targetForm = document.getElementById('dynamic-contact-form');
             if (homeView && targetForm) {
                 targetForm.classList.remove('hidden');
                 homeView.appendChild(targetForm);
@@ -284,56 +290,4 @@
     </script>
 
 </body>
-</html>        <!-- お問い合わせフォーム〜最後の閉じタグまで（完全なコードは参照元をご確認ください） -->
-        <main class="card">
-            <!-- お問い合わせフォーム要素 -->
-        </main>
-    </div>
-    <!-- 各種ビューおよびモーダル、スクリプト定義 -->
-    <script>
-        function showView(viewId) { /* 画面切り替え処理 */ }
-        function handleInstall() { /* インストール処理 */ }
-        function closeModal() { /* モーダル閉じる処理 */ }
-    </script>
-    <!-- 完全に省略なしの修正スクリプト（白い空のカードへ自動でフォームを書き込みます） -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // 画面上にあるカードをすべて探します
-            const cards = document.querySelectorAll('#view-home .card');
-            
-            // スクリーショにあった、店舗情報の下にある「4番目の空の白いカード」を狙います
-            if (cards && cards.length >= 4) {
-                const targetCard = cards[3]; // 4番目のカード
-                
-                // カードの中身をご指定のメール宛てのフォームに直接書き換えます
-                targetCard.innerHTML = `
-                    <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px; color: #333;">お問い合わせ</h2>
-                    <form action="https://formsubmit.co" method="POST">
-                        <input type="text" name="_honey" style="display:none">
-                        <input type="hidden" name="_next" value="https://github.io">
-                        
-                        <div style="margin-bottom: 16px; text-align: left;">
-                            <label style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お名前<span style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                            <input type="text" name="お名前" placeholder="例：山田 太郎" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.9); -webkit-appearance: none;">
-                        </div>
-                        
-                        <div style="margin-bottom: 16px; text-align: left;">
-                            <label style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">メールアドレス<span style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                            <input type="email" name="返信用メール" placeholder="例：example@email.com" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.9); -webkit-appearance: none;">
-                        </div>
-                        
-                        <div style="margin-bottom: 16px; text-align: left;">
-                            <label style="display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px;">お問い合わせ内容<span style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;">必須</span></label>
-                            <textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required style="width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; background: rgba(255,255,255,0.9); font-family: inherit; -webkit-appearance: none; resize: vertical;"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-blue" style="display: block; width: 100%; padding: 14px 20px; font-size: 1rem; font-weight: bold; text-align: center; color: white; background: #3b71ca; border-radius: 12px; border: none; cursor: pointer; margin-bottom: 0;">送信する</button>
-                    </form>
-                `;
-            }
-        });
-    </script>
-
-</body>
 </html>
-
