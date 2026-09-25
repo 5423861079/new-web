@@ -1,6 +1,6 @@
 {
-  "name": "レストラン公式アプリ",
-  "short_name": "レストラン",
+  "name": "Nexus公式アプリ",
+  "short_name": "Nexus",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#333333",
