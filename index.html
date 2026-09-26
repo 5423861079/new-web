@@ -149,5 +149,134 @@
 
     <script>
         function showView(viewId) {
-            document.getElementById('view-home').classList.add
+            document.getElementById('view-home').classList.add<body>
+    <!-- TOP画面 -->
+    <div id="view-home">
+        <header>
+            <h1>Nexus</h1>
+            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
+        </header>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
+            <button class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
+            <button class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
+        </main>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加すると、次回からアプリ感覚ですぐにメニューを開けます。</p>
+            <button class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
+        </main>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
+            <table class="info-table">
+                <tr><th>営業時間</th><td>11:30 〜 21:00</td></tr>
+                <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
+                <tr><th>電話番号</th><td>045-089-2786</td></tr>
+            </table>
+        </main>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="bf7d690e-96f3-49a8-8d0a-55bb2759a57a">
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+                <input type="hidden" name="redirect" id="nextUrl" value="">
+
+                <div class="form-group">
+                    <label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
+                    <input type="text" name="お名前" placeholder="例：鈴木 蓮">
+                </div>
+                <div class="form-group">
+                    <label>お問い合わせ内容<span class="required-badge">必須</span></label>
+                    <textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
+            </form>
+        </main>
+    </div>
+
+    <!-- 昼メニュー画面 -->
+    <div id="view-general" class="hidden">
+        <header>
+            <h1>メニュー (全て税込)</h1>
+            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
+        </header>
+        <main class="card">
+            <div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
+            <div class="menu-item"><span>えすかるご焼き</span><span>700円</span></div>
+            <div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
+            <div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
+            <div class="menu-item"><span>みかんジュース</span><span>400円</span></div>
+            <button class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
+        </main>
+    </div>
+
+    <!-- 夜メニュー画面 -->
+    <div id="view-evening" class="hidden">
+        <header class="dark">
+            <h1>18:00以降メニュー(全て税込)</h1>
+            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
+        </header>
+        <main class="card dark">
+            <div class="menu-item"><span>夜限定食べ放題</span><span class="price">2,500円</span></div>
+            <p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
+            <button class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
+        </main>
+    </div>    <!-- PWAモーダル -->
+    <div id="installModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
+            <div class="modal-title">ホーム画面に追加</div>
+            <div class="modal-subtitle">アプリ感覚でいつでも速く開けます。</div>
+            <div class="guide-list">
+                <ol>
+                    <li>ブラウザのメニューから「ホーム画面に追加」をタップします。</li>
+                    <li>画面の指示に従って追加を完了してください。</li>
+                </ol>
+            </div>
+            <button class="btn-close" onclick="closeModal()">閉じる</button>
+        </div>
+    </div>
+
+    <script>
+        // リダイレクト先URLを設定
+        document.getElementById('nextUrl').value = window.location.href;
+
+        // 画面切り替え機能（一般メニュー・夜メニュー・ホーム）
+        function showView(target) {
+            const views = ['home', 'general', 'evening'];
+            views.forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if (el) {
+                    if (v === target) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+            window.scrollTo(0, 0);
+        }
+
+        // PWA案内モーダル表示
+        function handleInstall() {
+            document.getElementById('installModal').classList.remove('hidden');
+        }
+
+        // モーダル非表示
+        function closeModal() {
+            document.getElementById('installModal').classList.add('hidden');
+        }
+
+        // Service Worker の登録 (PWA機能用)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW register failed: ', err));
+            });
+        }
+    </script>
+</body>
+</html>
+
+
 
