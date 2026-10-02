@@ -15,7 +15,10 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #333; line-height: 1.6; text-align: center; 
-            background-image: url('IMG_3693.jpeg'); background-attachment: fixed; background-size: cover; background-position: center; 
+            background-image: url('IMG_3693.jpeg'); 
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center; 
             min-height: 100vh; padding-bottom: 40px; 
         }
         header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 24px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
@@ -55,9 +58,10 @@
         .required-badge { background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
-</head><body>
+</head>
+<body>
     <!-- TOP画面 -->
-    <div id="view-home">
+<div id="view-home">
         <header>
             <h1>Nexus</h1>
             <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
@@ -130,7 +134,7 @@
         </main>
     </div>
         <!-- PWAモーダル -->
-    <div id="installModal" class="modal-overlay hidden">
+<div id="installModal" class="modal-overlay hidden">
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
             <div class="modal-title">ホーム画面に追加</div>
@@ -193,5 +197,3 @@
     </script>
 </body>
 </html>
-
-
