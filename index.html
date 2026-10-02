@@ -60,8 +60,8 @@
     </style>
 </head>
 <body>
-    <!-- TOP画面 -->
-<div id="view-home">
+        <!-- TOP画面 -->
+    <div id="view-home">
         <header>
             <h1>Nexus</h1>
             <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
@@ -87,10 +87,12 @@
         </main>
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <form action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="bf7d690e-96f3-49a8-8d0a-55bb2759a57a">
-                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
-                <input type="hidden" name="redirect" id="nextUrl" value="">
+            <!-- FormSubmit（メールアドレス埋め込み済み） -->
+            <form action="https://formsubmit.co/delete.n700s@gmail.com" method="POST">
+                <!-- スパム防止用ハニーポット -->
+                <input type="text" name="_honey" style="display:none">
+                <!-- 送信後のリダイレクト先 -->
+                <input type="hidden" name="_next" id="nextUrl" value="">
 
                 <div class="form-group">
                     <label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
@@ -134,7 +136,7 @@
         </main>
     </div>
         <!-- PWAモーダル -->
-<div id="installModal" class="modal-overlay hidden">
+    <div id="installModal" class="modal-overlay hidden">
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
             <div class="modal-title">ホーム画面に追加</div>
@@ -150,7 +152,7 @@
     </div>
 
     <script>
-        // リダイレクト先URLを設定（安全に設定）
+        // リダイレクト先URLを設定（FormSubmit用: _next に現在のURLを設定）
         const nextUrlEl = document.getElementById('nextUrl');
         if (nextUrlEl) {
             nextUrlEl.value = window.location.href;
@@ -197,3 +199,5 @@
     </script>
 </body>
 </html>
+
+
