@@ -60,7 +60,7 @@
     </style>
 </head>
 <body>
-        <!-- TOP画面 -->
+    <!-- TOP画面 -->
     <div id="view-home">
         <header>
             <h1>Nexus</h1>
@@ -87,8 +87,10 @@
         </main>
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <!-- FormSubmit（メールアドレス埋め込み済み） -->
+            <!-- FormSubmit（CAPTCHA無効化＆メールアドレス設定済み） -->
             <form action="https://formsubmit.co/delete.n700s@gmail.com" method="POST">
+                <!-- ロボット確認画面（CAPTCHA）を無効化 -->
+                <input type="hidden" name="_captcha" value="false">
                 <!-- スパム防止用ハニーポット -->
                 <input type="text" name="_honey" style="display:none">
                 <!-- 送信後のリダイレクト先 -->
@@ -135,7 +137,7 @@
             <button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
         </main>
     </div>
-        <!-- PWAモーダル -->
+    <!-- PWAモーダル -->
     <div id="installModal" class="modal-overlay hidden">
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
@@ -199,5 +201,3 @@
     </script>
 </body>
 </html>
-
-
