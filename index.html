@@ -43,7 +43,7 @@
         .hidden { display: none !important; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
         
-        /* ややゆっくり下からふわっと浮上するアニメーション */
+        /* ややゆっくり下からふわっと浮上するアニメーション（0.4秒） */
         .modal-content { 
             background: #ffffff; 
             border-radius: 24px; 
@@ -76,142 +76,177 @@
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Nexus</h1>
-    <p class="subtitle">公式案内・お問い合わせ</p>
-</header>
-
-<div class="card">
-    <div class="menu-item">
-        <span>基本料金</span>
-        <span class="price">¥3,000 ~</span>
+    <!-- TOP画面 -->
+    <div id="view-home">
+        <header>
+            <h1>Nexus</h1>
+            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
+        </header>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
+            <button type="button" class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
+            <button type="button" class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
+        </main>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う</h2>
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加するとアプリのように開けます。</p>
+            <button type="button" class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
+        </main>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
+            <table class="info-table">
+                <tr><th>営業時間</th><td>11:30 〜 21:00</td></tr>
+                <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
+                <tr><th>電話番号</th><td>045-089-2786</td></tr>
+            </table>
+        </main>
+        <main class="card">
+            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
+                    <input type="text" name="お名前" placeholder="例：鈴木 蓮">
+                </div>
+                <div class="form-group">
+                    <label>お問い合わせ内容<span class="required-badge">必須</span></label>
+                    <textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required></textarea>
+                </div>
+                <button type="submit" id="submitBtn" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
+            </form>
+        </main>
     </div>
 
-    <table class="info-table">
-        <tr>
-            <th>対応時間</th>
-            <td>10:00 - 22:00</td>
-        </tr>
-        <tr>
-            <th>支払い方法</th>
-            <td>PayPay / 銀行振込</td>
-        </tr>
-    </table>
-
-    <div class="note">※ご不明な点はお気軽にお問い合わせください。</div>
-</div>
-
-<div class="card">
-    <form id="contactForm">
-        <div class="form-group">
-            <label for="name">お名前 <span class="required-badge">必須</span></label>
-            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">メールアドレス <span class="required-badge">必須</span></label>
-            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
-        </div>
-
-        <div class="form-group">
-            <label for="message">お問い合わせ内容 <span class="required-badge">必須</span></label>
-            <textarea id="message" name="message" rows="4" placeholder="お問い合わせ内容をご入力ください" required></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn" class="btn btn-blue">送信する</button>
-    </form>
-</div>
-
-<!-- PWAインストール案内モーダル -->
-<div id="pwaModal" class="modal-overlay hidden">
-    <div class="modal-content">
-        <img src="IMG_3693.jpeg" alt="Nexus App Icon" class="app-icon">
-        <div class="modal-title">ホーム画面に追加</div>
-        <div class="modal-subtitle">アプリとして追加すると、より快適にご利用いただけます。</div>
-        <div class="guide-list">
-            <ol>
-                <li>画面下部（または上部）の <strong>共有ボタン</strong> をタップ</li>
-                <li>メニューから <strong>「ホーム画面に追加」</strong> を選択</li>
-            </ol>
-        </div>
-        <button type="button" class="btn-close" id="closePwaModal">閉じる</button>
+    <!-- 昼メニュー画面 -->
+    <div id="view-general" class="hidden">
+        <header>
+            <h1>メニュー (全て税込)</h1>
+            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
+        </header>
+        <main class="card">
+            <div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
+            <div class="menu-item"><span>えすかるご焼き</span><span>700円</span></div>
+            <div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
+            <div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
+            <div class="menu-item"><span>みかんジュース</span><span>400円</span></div>
+            <button type="button" class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
+        </main>
     </div>
-</div>
 
-<!-- 送信完了メッセージ用モーダル -->
-<div id="statusModal" class="modal-overlay hidden">
-    <div class="modal-content">
-        <div class="modal-title" id="statusModalTitle">送信完了</div>
-        <div class="modal-subtitle" id="statusModalMessage">お問い合わせを受け付けました。</div>
-        <button type="button" class="btn-close" id="closeStatusModal">閉じる</button>
+    <!-- 夜メニュー画面 -->
+    <div id="view-evening" class="hidden">
+        <header class="dark">
+            <h1>18:00以降メニュー(全て税込)</h1>
+            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
+        </header>
+        <main class="card dark">
+            <div class="menu-item"><span>夜限定食べ放題</span><span class="price">2,500円</span></div>
+            <p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
+            <button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
+        </main>
     </div>
-</div>
-<script>
-    // PWA判定・案内モーダル制御
-    document.addEventListener('DOMContentLoaded', () => {
-        const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
-        const pwaModal = document.getElementById('pwaModal');
-        const closePwaModalBtn = document.getElementById('closePwaModal');
 
-        // PWAとして開かれていない場合にモーダル表示（少しだけ遅延させて滑らかに表示）
-        if (!isStandalone) {
-            setTimeout(() => {
-                pwaModal.classList.remove('hidden');
-            }, 600);
+    <!-- PWA案内モーダル -->
+    <div id="pwaModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <img src="IMG_3693.jpeg" alt="Nexus App Icon" class="app-icon">
+            <div class="modal-title">ホーム画面に追加</div>
+            <div class="modal-subtitle">アプリとして追加すると、より快適にご利用いただけます。</div>
+            <div class="guide-list">
+                <ol>
+                    <li>画面下部（または上部）の <strong>共有ボタン</strong> をタップ</li>
+                    <li>メニューから <strong>「ホーム画面に追加」</strong> を選択</li>
+                </ol>
+            </div>
+            <button type="button" class="btn-close" id="closePwaModal">閉じる</button>
+        </div>
+    </div>
+
+    <!-- 送信完了モーダル -->
+    <div id="statusModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-title" id="statusModalTitle">送信完了</div>
+            <div class="modal-subtitle" id="statusModalMessage">お問い合わせを受け付けました。</div>
+            <button type="button" class="btn-close" id="closeStatusModal">閉じる</button>
+        </div>
+    </div>
+    <script>
+        // 画面切り替え（ホーム / 一般メニュー / 夜メニュー）
+        function showView(viewName) {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-general').classList.add('hidden');
+            document.getElementById('view-evening').classList.add('hidden');
+
+            const targetView = document.getElementById('view-' + viewName);
+            if (targetView) {
+                targetView.classList.remove('hidden');
+            }
+            window.scrollTo(0, 0);
         }
 
-        closePwaModalBtn.addEventListener('click', () => {
-            pwaModal.classList.add('hidden');
+        // PWA手動ボタンでの案内モーダル表示
+        function handleInstall() {
+            document.getElementById('pwaModal').classList.remove('hidden');
+        }
+
+        // PWA判定・案内モーダル自動表示
+        document.addEventListener('DOMContentLoaded', () => {
+            const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+            const pwaModal = document.getElementById('pwaModal');
+            const closePwaModalBtn = document.getElementById('closePwaModal');
+
+            // PWA未追加の場合に自動案内（0.6秒遅延でふわっと表示）
+            if (!isStandalone) {
+                setTimeout(() => {
+                    pwaModal.classList.remove('hidden');
+                }, 600);
+            }
+
+            closePwaModalBtn.addEventListener('click', () => {
+                pwaModal.classList.add('hidden');
+            });
+
+            pwaModal.addEventListener('click', (e) => {
+                if (e.target === pwaModal) {
+                    pwaModal.classList.add('hidden');
+                }
+            });
         });
 
-        // 背景タップでも閉じられるように設定
-        pwaModal.addEventListener('click', (e) => {
-            if (e.target === pwaModal) {
-                pwaModal.classList.add('hidden');
+        // フォーム送信制御（完了モーダル浮上演出付き）
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusModal = document.getElementById('statusModal');
+        const closeStatusModalBtn = document.getElementById('closeStatusModal');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // 送信中の連打防止
+            submitBtn.disabled = true;
+            submitBtn.innerText = '送信中...';
+
+            // 1秒後に送信完了（ゆっくり浮上するモーダル表示）
+            setTimeout(() => {
+                contactForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerText = '送信する';
+
+                // モーダル表示（CSSの floatUp アニメーションが適用されます）
+                statusModal.classList.remove('hidden');
+            }, 1000);
+        });
+
+        // 送信完了モーダルの閉じる制御
+        closeStatusModalBtn.addEventListener('click', () => {
+            statusModal.classList.add('hidden');
+        });
+
+        statusModal.addEventListener('click', (e) => {
+            if (e.target === statusModal) {
+                statusModal.classList.add('hidden');
             }
         });
-    });
-
-    // フォーム送信制御（ダミー送信処理）
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusModal = document.getElementById('statusModal');
-    const statusModalTitle = document.getElementById('statusModalTitle');
-    const statusModalMessage = document.getElementById('statusModalMessage');
-    const closeStatusModalBtn = document.getElementById('closeStatusModal');
-
-    contactForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // 実際の送信をキャンセル
-
-        // ボタンの重調状態（連打防止）
-        submitBtn.disabled = true;
-        submitBtn.innerText = '送信中...';
-
-        // 1秒後に送信完了を模したモーダル表示
-        setTimeout(() => {
-            contactForm.reset();
-            submitBtn.disabled = false;
-            submitBtn.innerText = '送信する';
-
-            statusModalTitle.innerText = '送信完了';
-            statusModalMessage.innerText = 'お問い合わせを受け付けました。';
-            
-            // モーダル表示（CSSの floatUp アニメーションでゆっくり浮上）
-            statusModal.classList.remove('hidden');
-        }, 1000);
-    });
-
-    // 送信完了モーダルの閉じる制御
-    closeStatusModalBtn.addEventListener('click', () => {
-        statusModal.classList.add('hidden');
-    });
-
-    statusModal.addEventListener('click', (e) => {
-        if (e.target === statusModal) {
-            statusModal.classList.add('hidden');
-        }
-    });
-</script>
+    </script>
 </body>
 </html>
