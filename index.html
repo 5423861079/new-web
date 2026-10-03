@@ -33,7 +33,7 @@
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
             <table class="info-table">
-                <tr><th>営業日時</th><td>11:30〜21:00毎週火曜祝日のみ休み</td></tr>
+                <tr><th>営業日時</th><td>11:30〜21:00<br>毎週火曜祝日のみ休み</td></tr>
                 <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
                 <tr><th>電話番号</th><td>045-089-2786</td></tr>
             </table>
@@ -53,8 +53,7 @@
             </form>
         </main>
     </div>
-
-    <!-- 昼メニュー画面 -->
+<!-- 昼メニュー画面 -->
     <div id="view-general" class="hidden">
         <header>
             <h1>メニュー (全て税込)</h1>
@@ -128,165 +127,11 @@
         .btn-blue { background: #3b71ca; color: white; }
         .btn-dark { background: #1f2937; color: white; }
         .btn-green { background: #388e3c; color: white; }
-        
-        /* オフライン時・送信中のボタン無効化スタイル */
-        .btn:disabled { background: #94a3b8 !important; color: #f1f5f9 !important; cursor: not-allowed; opacity: 0.8; }
-        
-        .menu-item { background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); color: #333; }
-        .dark .menu-item { background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
-        .dark .price { color: #60a5fa; }
-        .info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-        .info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
-        .info-table th { text-align: left; width: 35%; color: #555; }
-        .info-table td { text-align: right; font-weight: bold; }
-        .note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
-        .hidden { display: none !important; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        
-        /* ゆっくり下からふわっと浮上するアニメーション（0.4秒） */
-        .modal-content { 
-            background: #ffffff; 
-            border-radius: 24px; 
-            padding: 32px 24px 24px 24px; 
-            max-width: 360px; 
-            width: 100%; 
-            text-align: center; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
-            animation: floatUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-        }
-        
-        @keyframes floatUp { 
-            from { opacity: 0; transform: translateY(20px) scale(0.96); } 
-            to { opacity: 1; transform: translateY(0) scale(1); } 
-        }
-
-        .app-icon { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-        .modal-title { font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 6px; }
-        .modal-subtitle { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; }
-        .guide-list { text-align: left; font-size: 0.88rem; color: #334155; line-height: 1.7; margin-bottom: 24px; }
-        .guide-list ol { padding-left: 0; list-style-position: inside; }
-        .guide-list li { margin-bottom: 8px; }
-        .btn-close { background: #f1f5f9; color: #475569; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        .btn-close:active { background: #e2e8f0; }
-        .form-group { margin-bottom: 16px; text-align: left; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; font-family: inherit; background: rgba(255,255,255,0.7); }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #3b71ca; background: rgba(255,255,255,1); }
-        .required-badge { background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
-    </style>
-    <script>
-        // 画面切り替え（ホーム / 一般メニュー / 夜メニュー）
-        function showView(viewName) {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-general').classList.add('hidden');
-            document.getElementById('view-evening').classList.add('hidden');
-
-            const targetView = document.getElementById('view-' + viewName);
-            if (targetView) {
-                targetView.classList.remove('hidden');
-            }
-            window.scrollTo(0, 0);
-        }
-
-        // PWA手動ボタンでのみ案内モーダルを表示
-        function handleInstall() {
-            document.getElementById('pwaModal').classList.remove('hidden');
-        }
-
-        // ネットワーク状態監視と送信ボタン切り替え関数（パターンB）
-        function updateNetworkStatus() {
-            const submitBtn = document.getElementById('submitBtn');
-            if (!submitBtn) return;
-
-            if (navigator.onLine) {
-                submitBtn.disabled = false;
-                submitBtn.innerText = '送信する';
-            } else {
-                submitBtn.disabled = true;
-                submitBtn.innerText = 'オフラインのため送信不可';
-            }
-        }
-
-        // PWAモーダル・ネットワーク監視イベント設定
-        document.addEventListener('DOMContentLoaded', () => {
-            const pwaModal = document.getElementById('pwaModal');
-            const closePwaModalBtn = document.getElementById('closePwaModal');
-
-            closePwaModalBtn.addEventListener('click', () => {
-                pwaModal.classList.add('hidden');
-            });
-
-            pwaModal.addEventListener('click', (e) => {
-                if (e.target === pwaModal) {
-                    pwaModal.classList.add('hidden');
-                }
-            });
-
-            // 初期表示時のネットワーク状態反映
-            updateNetworkStatus();
-        });
-
-        // ネットワーク切断・復帰イベントリスナー（リアルタイム検知）
-        window.addEventListener('online', updateNetworkStatus);
-        window.addEventListener('offline', updateNetworkStatus);
-
-        // フォーム送信制御（オフライン判定 ＆ 浮上モーダル）
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const statusModal = document.getElementById('statusModal');
-        const statusModalTitle = document.getElementById('statusModalTitle');
-        const statusModalMessage = document.getElementById('statusModalMessage');
-        const closeStatusModalBtn = document.getElementById('closeStatusModal');
-
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // オフライン時のガード処理（直接送信が試みられた場合）
-            if (!navigator.onLine) {
-                statusModalTitle.innerText = "送信エラー";
-                statusModalMessage.innerText = "オフラインのため送信できません。ネットワーク接続を確認してください。";
-                statusModal.classList.remove('hidden');
-                return;
-            }
-
-            // 送信中の連打防止
-            submitBtn.disabled = true;
-            submitBtn.innerText = '送信中...';
-
-            // 1秒後に送信完了を表示
-            setTimeout(() => {
-                contactForm.reset();
-                
-                statusModalTitle.innerText = "送信完了";
-                statusModalMessage.innerText = "お問い合わせを受け付けました。";
-                statusModal.classList.remove('hidden');
-
-                // ボタン状態を現在のネットワーク接続に合わせて戻す
-                updateNetworkStatus();
-            }, 1000);
-        });
-
-        // 送信完了/エラーモーダルの閉じる制御
-        closeStatusModalBtn.addEventListener('click', () => {
-            statusModal.classList.add('hidden');
-        });
-
-        statusModal.addEventListener('click', (e) => {
-            if (e.target === statusModal) {
-                statusModal.classList.add('hidden');
-            }
-        });
-
-        // Service Workerの登録（オフラインPWA対応）
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').then((reg) => {
-                    console.log('Service Worker 登録成功:', reg.scope);
-                }).catch((err) => {
-                    console.log('Service Worker 登録失敗:', err);
-                });
-            });
-        }
-    </script>
-</body>
-</html>
+<main class="card">
+    <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
+    <table class="info-table">
+        <tr><th>営業日時</th><td>11:30〜21:00<br>毎週火曜祝日のみ休み</td></tr>
+        <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
+        <tr><th>電話番号</th><td>045-089-2786</td></tr>
+    </table>
+</main>
