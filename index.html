@@ -1,109 +1,108 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus</title>
-    <!-- Web App Manifest (Android PWA用) -->
-    <link rel="manifest" href="manifest.json">
-    <!-- iOS (iPhone) 用の設定 -->
-    <link rel="apple-touch-icon" href="IMG_3693.jpeg">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Nexus">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus</title>
+<!-- Web App Manifest (Android PWA用) -->
+<link rel="manifest" href="manifest.json">
+<!-- iOS (iPhone) 用の設定 -->
+<link rel="apple-touch-icon" href="IMG_3693.jpeg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Nexus">
 </head>
 <body>
-    <!-- TOP画面 -->
-    <div id="view-home">
-        <header>
-            <h1>Nexus</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
-            <button type="button" class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
-            <button type="button" class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
-        </main>
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加するとアプリのように開けます。</p>
-            <button type="button" class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
-        </main>
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報</h2>
-            <table class="info-table">
-                <tr><th>営業日時</th><td>11:30〜21:00<br>火曜及び祝日定休</td></tr>
-                <tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
-                <tr><th>電話番号</th><td>045-089-2786</td></tr>
-            </table>
-        </main>
-        <main class="card">
-            <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <form id="contactForm">
-                <div class="form-group">
-                    <label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
-                    <input type="text" name="お名前" placeholder="例：鈴木 蓮">
-                </div>
-                <div class="form-group">
-                    <label>お問い合わせ内容<span class="required-badge">必須</span></label>
-                    <textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください" required></textarea>
-                </div>
-                <button type="submit" id="submitBtn" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
-            </form>
-        </main>
-    </div>
+<!-- TOP画面 -->
+<div id="view-home">
+<header>
+<h1>Nexus</h1>
+<div class="subtitle">※このページは架空です。 / *This page is fictional。</div>
+</header>
+<main class="card">
+<h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">メニュー。</h2>
+<p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ご覧になりたいメニューを選んでください。</p>
+<button type="button" class="btn btn-blue" onclick="showView('general')">一般メニューを見る</button>
+<button type="button" class="btn btn-dark" onclick="showView('evening')">夜メニューを見る</button>
+</main>
+<main class="card">
+<h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">アプリのように使う。</h2>
+<p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #666;">ホーム画面に追加するとアプリのように開けます。</p>
+<button type="button" class="btn btn-green" onclick="handleInstall()">ホーム画面への追加方法</button>
+</main>
+<main class="card">
+<h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 12px;">店舗情報。</h2>
+<table class="info-table">
+<tr><th>営業日時</th><td>11:30〜21:00
+火曜及び祝日定休</td></tr>
+<tr><th>住所</th><td>東京都杉並区南鴨宮12-9-6</td></tr>
+<tr><th>電話番号</th><td>045-089-2786</td></tr>
+</table>
+</main>
+<main class="card">
+<h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ。</h2>
+<form id="contactForm" novalidate>
+<div class="form-group">
+<label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
+<input type="text" name="お名前" placeholder="例：鈴木 蓮">
+</div>
+<div class="form-group">
+<label>お問い合わせ内容<span class="required-badge">必須</span></label>
+<textarea name="お問い合わせ内容" rows="4" placeholder="こちらに入力してください"></textarea>
+<div id="customError" class="custom-error-msg" style="display: none; color: #dc3545; font-size: 0.85rem; margin-top: 4px;">内容を具体的に書いてください。</div>
+</div>
+<button type="submit" id="submitBtn" class="btn btn-blue" style="margin-bottom: 0;">送信する</button>
+</form>
+</main>
+</div>
 <!-- 昼メニュー画面 -->
-    <div id="view-general" class="hidden">
-        <header>
-            <h1>メニュー (全て税込)</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card">
-            <div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
-            <div class="menu-item"><span>ビビンバ</span><span>700円</span></div>
-            <div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
-            <div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
-            <div class="menu-item"><span>シッケ(韓国甘酒)</span><span>400円</span></div>
-            <button type="button" class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
-        </main>
-    </div>
-
-    <!-- 夜メニュー画面 -->
-    <div id="view-evening" class="hidden">
-        <header class="dark">
-            <h1>18:00以降メニュー(全て税込)</h1>
-            <div class="subtitle">※このページは架空です。 / *This page is fictional.</div>
-        </header>
-        <main class="card dark">
-            <div class="menu-item"><span>夜限定食べ放題</span><span class="price">2,500円</span></div>
-            <p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
-            <button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
-        </main>
-    </div>
-
-    <!-- PWA案内モーダル -->
-    <div id="pwaModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <img src="IMG_3693.jpeg" alt="Nexus App Icon" class="app-icon">
-            <div class="modal-title">ホーム画面に追加</div>
-            <div class="modal-subtitle">アプリのように快適にご利用いただけます。</div>
-            <div class="guide-list">
-                <ol>
-                    <li>画面下部（または上部）の <strong>共有ボタン</strong> をタップ</li>
-                    <li>メニューから <strong>「ホーム画面に追加」</strong> を選択</li>
-                </ol>
-            </div>
-            <button type="button" class="btn-close" id="closePwaModal">閉じる</button>
-        </div>
-    </div>
-
-    <!-- ステータスモーダル（送信完了 / オフラインエラー兼用） -->
+<div id="view-general" class="hidden">
+<header>
+<h1>メニュー (全て税込)。</h1>
+<div class="subtitle">※このページは架空です。 / *This page is fictional。</div>
+</header>
+<main class="card">
+<div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
+<div class="menu-item"><span>ビビンバ</span><span>700円</span></div>
+<div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
+<div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
+<div class="menu-item"><span>シッケ(韓国甘酒)</span><span>400円</span></div>
+<button type="button" class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
+</main>
+</div>
+<!-- 夜メニュー画面 -->
+<div id="view-evening" class="hidden">
+<header class="dark">
+<h1>18:00以降メニュー(全て税込)。</h1>
+<div class="subtitle">※このページは架空です。 / *This page is fictional。</div>
+</header>
+<main class="card dark">
+<div class="menu-item"><span>夜限定食べ放題</span><span class="price">2,500円</span></div>
+<p class="note">※それ以外のメニューも、18時以降注文可能です。</p>
+<button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
+</main>
+</div>
+<!-- PWA案内モーダル -->
+<div id="pwaModal" class="modal-overlay hidden">
+<div class="modal-content">
+<img src="IMG_3693.jpeg" alt="Nexus App Icon" class="app-icon">
+<div class="modal-title">ホーム画面に追加。</div>
+<div class="modal-subtitle">アプリのように快適にご利用いただけます。</div>
+<div class="guide-list">
+<ol>
+<li>画面下部（または上部）の <strong>共有ボタン</strong> をタップ。</li>
+<li>メニューから <strong>「ホーム画面に追加」</strong> を選択。</li>
+</ol>
+</div>
+<button type="button" class="btn-close" id="closePwaModal">閉じる。</button>
+</div>
+</div>
+<!-- ステータスモーダル（送信完了 / オフラインエラー兼用）。 -->
     <div id="statusModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <div class="modal-title" id="statusModalTitle">送信完了</div>
+            <div class="modal-title" id="statusModalTitle">送信完了。</div>
             <div class="modal-subtitle" id="statusModalMessage">お問い合わせを受け付けました。</div>
-            <button type="button" class="btn-close" id="closeStatusModal">閉じる</button>
+            <button type="button" class="btn-close" id="closeStatusModal">閉じる。</button>
         </div>
     </div>
     <style>
@@ -127,7 +126,7 @@
         .btn-blue { background: #3b71ca; color: white; }
         .btn-dark { background: #1f2937; color: white; }
         .btn-green { background: #388e3c; color: white; }
-/* オフライン時・送信中のボタン無効化スタイル */
+        /* オフライン時・送信中のボタン無効化スタイル。 */
         .btn:disabled { background: #94a3b8 !important; color: #f1f5f9 !important; cursor: not-allowed; opacity: 0.8; }
         
         .menu-item { background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); color: #333; }
@@ -141,7 +140,7 @@
         .hidden { display: none !important; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
         
-        /* ゆっくり下からふわっと浮上するアニメーション（0.4秒） */
+        /* ゆっくり下からふわっと浮上するアニメーション（0.4秒）。 */
         .modal-content { 
             background: #ffffff; 
             border-radius: 24px; 
@@ -173,7 +172,7 @@
         .required-badge { background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
     </style>
     <script>
-        // 画面切り替え（ホーム / 一般メニュー / 夜メニュー）
+// 画面切り替え（ホーム / 一般メニュー / 夜メニュー）。
         function showView(viewName) {
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-general').classList.add('hidden');
@@ -186,26 +185,26 @@
             window.scrollTo(0, 0);
         }
 
-        // PWA手動ボタンでのみ案内モーダルを表示
+        // PWA手動ボタンでのみ案内モーダルを表示。
         function handleInstall() {
             document.getElementById('pwaModal').classList.remove('hidden');
         }
 
-        // ネットワーク状態監視と送信ボタン切り替え関数（パターンB）
+        // ネットワーク状態監視と送信ボタン切り替え関数（パターンB）。
         function updateNetworkStatus() {
             const submitBtn = document.getElementById('submitBtn');
             if (!submitBtn) return;
 
             if (navigator.onLine) {
                 submitBtn.disabled = false;
-                submitBtn.innerText = '送信する';
+                submitBtn.innerText = '送信する。';
             } else {
                 submitBtn.disabled = true;
-                submitBtn.innerText = 'オフラインのため送信不可';
+                submitBtn.innerText = 'オフラインのため送信不可。';
             }
         }
 
-        // PWAモーダル・ネットワーク監視イベント設定
+        // PWAモーダル・ネットワーク監視イベント設定。
         document.addEventListener('DOMContentLoaded', () => {
             const pwaModal = document.getElementById('pwaModal');
             const closePwaModalBtn = document.getElementById('closePwaModal');
@@ -220,51 +219,72 @@
                 }
             });
 
-            // 初期表示時のネットワーク状態反映
+            // 初期表示時のネットワーク状態反映。
             updateNetworkStatus();
         });
 
-        // ネットワーク切断・復帰イベントリスナー（リアルタイム検知）
+        // ネットワーク切断・復帰イベントリスナー（リアルタイム検知）。
         window.addEventListener('online', updateNetworkStatus);
         window.addEventListener('offline', updateNetworkStatus);
 
-        // フォーム送信制御（オフライン判定 ＆ 浮上モーダル）
+        // フォーム送信制御（オフライン判定 ＆ 浮上モーダル）。
         const contactForm = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusModal = document.getElementById('statusModal');
         const statusModalTitle = document.getElementById('statusModalTitle');
         const statusModalMessage = document.getElementById('statusModalMessage');
         const closeStatusModalBtn = document.getElementById('closeStatusModal');
+        const textareaField = contactForm.querySelector('textarea[name="お問い合わせ内容"]');
+        const customError = document.getElementById('customError');
 
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // オフライン時のガード処理（直接送信が試みられた場合）
+            // バリデーションチェック：空欄の場合に独自の「内容を具体的に書いてください。」を表示
+            if (!textareaField.value.trim()) {
+                if (customError) customError.style.display = 'block';
+                textareaField.focus();
+                return;
+            } else {
+                if (customError) customError.style.display = 'none';
+            }
+
+            // オフライン時のガード処理（直接送信が試みられた場合）。
             if (!navigator.onLine) {
-                statusModalTitle.innerText = "送信エラー";
+                statusModalTitle.innerText = "送信エラー。";
                 statusModalMessage.innerText = "オフラインのため送信できません。ネットワーク接続を確認してください。";
                 statusModal.classList.remove('hidden');
                 return;
             }
 
-            // 送信中の連打防止
+            // 送信中の連打防止。
             submitBtn.disabled = true;
             submitBtn.innerText = '送信中...';
 
-            // 1秒後に送信完了を表示
+            // 1秒後に送信完了を表示。
             setTimeout(() => {
                 contactForm.reset();
+                if (customError) customError.style.display = 'none';
                 
-                statusModalTitle.innerText = "送信完了";
+                statusModalTitle.innerText = "送信完了。";
                 statusModalMessage.innerText = "お問い合わせを受け付けました。";
                 statusModal.classList.remove('hidden');
 
-                // ボタン状態を現在のネットワーク接続に合わせて戻す
+                // ボタン状態を現在のネットワーク接続に合わせて戻す。
                 updateNetworkStatus();
             }, 1000);
         });
 
-        // 送信完了/エラーモーダルの閉じる制御
+        // 入力時にエラー表示を消す。
+        if (textareaField) {
+            textareaField.addEventListener('input', () => {
+                if (textareaField.value.trim() && customError) {
+                    customError.style.display = 'none';
+                }
+            });
+        }
+
+        // 送信完了/エラーモーダルの閉じる制御。
         closeStatusModalBtn.addEventListener('click', () => {
             statusModal.classList.add('hidden');
         });
@@ -275,7 +295,7 @@
             }
         });
 
-        // Service Workerの登録（オフラインPWA対応）
+        // Service Workerの登録（オフラインPWA対応）。
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js').then((reg) => {
