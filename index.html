@@ -87,10 +87,7 @@
         </main>
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <form id="contactForm" action="https://formsubmit.co/ajax/delete.n700s@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="text" name="_honey" style="display:none">
-
+            <form id="contactForm">
                 <div class="form-group">
                     <label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
                     <input type="text" name="お名前" placeholder="例：鈴木 蓮">
@@ -132,7 +129,7 @@
             <button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
         </main>
     </div>
-    <!-- PWA案内モーダル -->
+            <!-- PWA案内モーダル -->
     <div id="installModal" class="modal-overlay hidden">
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
@@ -199,43 +196,21 @@
             }
         }
 
-        // iPhoneのSafariでも変な画面に飛ばず、綺麗なモーダルで完了を知らせる処理
+        // フォーム送信時の安全なダミー処理（外部通信ゼロ＆データ即座消去）
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
+                // 1. 外部サーバーへの通信を完全にストップ
                 e.preventDefault();
-                const submitBtn = document.getElementById('submitBtn');
-                submitBtn.disabled = true;
-                submitBtn.textContent = '送信中...';
 
-                const formData = new FormData(contactForm);
+                // 2. 送信完了モーダルを表示
+                const successModal = document.getElementById('successModal');
+                if (successModal) {
+                    successModal.classList.remove('hidden');
+                }
 
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // ダサいalertの代わりに、綺麗な統一デザインのモーダルを表示
-                        const successModal = document.getElementById('successModal');
-                        if (successModal) {
-                            successModal.classList.remove('hidden');
-                        }
-                        contactForm.reset();
-                    } else {
-                        alert('送信に失敗しました。もう一度お試しください。');
-                    }
-                })
-                .catch(error => {
-                    alert('通信エラーが発生しました。');
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = '送信する';
-                });
+                // 3. 入力されたお名前や内容を即座に完全消去（メモリ上から破棄）
+                contactForm.reset();
             });
         }
 
@@ -248,4 +223,5 @@
     </script>
 </body>
 </html>
+
 
