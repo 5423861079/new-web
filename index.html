@@ -59,7 +59,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
-<body>
+    <body>
     <!-- TOP画面 -->
     <div id="view-home">
         <header>
@@ -87,13 +87,9 @@
         </main>
         <main class="card">
             <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
-            <!-- id="contactForm" を追加しました -->
             <form id="contactForm" action="https://formsubmit.co/ajax/delete.n700s@gmail.com" method="POST">
-                <!-- ロボット確認画面（CAPTCHA）を無効化 -->
                 <input type="hidden" name="_captcha" value="false">
-                <!-- スパム防止用ハニーポット -->
                 <input type="text" name="_honey" style="display:none">
-                <!-- ※AJAX送信にするため _next は不要になります -->
 
                 <div class="form-group">
                     <label>お名前<span class="required-badge">本名でなくても良いので何か書いてください</span></label>
@@ -136,7 +132,7 @@
             <button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
         </main>
     </div>
-    <!-- PWAモーダル -->
+    <!-- PWA案内モーダル -->
     <div id="installModal" class="modal-overlay hidden">
         <div class="modal-content">
             <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
@@ -149,6 +145,16 @@
                 </ol>
             </div>
             <button type="button" class="btn-close" onclick="closeModal()">閉じる</button>
+        </div>
+    </div>
+
+    <!-- 送信完了モーダル（デザイン統一） -->
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <img src="IMG_3693.jpeg" alt="App Icon" class="app-icon">
+            <div class="modal-title">送信完了</div>
+            <div class="modal-subtitle">お問い合わせが送信されました！</div>
+            <button type="button" class="btn-close" onclick="closeSuccessModal()">閉じる</button>
         </div>
     </div>
 
@@ -177,7 +183,7 @@
             }
         }
 
-        // モーダル非表示
+        // PWA案内モーダル非表示
         function closeModal() {
             const modal = document.getElementById('installModal');
             if (modal) {
@@ -185,11 +191,19 @@
             }
         }
 
-        // iPhoneのSafariでも変な画面に飛ばず、その場で安全に送信する処理
+        // 送信完了モーダル非表示
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // iPhoneのSafariでも変な画面に飛ばず、綺麗なモーダルで完了を知らせる処理
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // ページが勝手に飛ぶのを防ぐ
+                e.preventDefault();
                 const submitBtn = document.getElementById('submitBtn');
                 submitBtn.disabled = true;
                 submitBtn.textContent = '送信中...';
@@ -205,8 +219,12 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        alert('お問い合わせが送信されました！');
-                        contactForm.reset(); // フォームをきれいにする
+                        // ダサいalertの代わりに、綺麗な統一デザインのモーダルを表示
+                        const successModal = document.getElementById('successModal');
+                        if (successModal) {
+                            successModal.classList.remove('hidden');
+                        }
+                        contactForm.reset();
                     } else {
                         alert('送信に失敗しました。もう一度お試しください。');
                     }
@@ -230,3 +248,4 @@
     </script>
 </body>
 </html>
+
