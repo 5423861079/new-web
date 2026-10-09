@@ -14,7 +14,7 @@
 </head>
 <body>
 <!-- TOP画面 -->
-<div id="view-home">
+<div id="view-home" class="view-section">
 <header style="background: rgba(0, 0, 0, 0.35); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
 <h1>Nexus</h1>
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
@@ -56,7 +56,7 @@
 </div>
 
 <!-- 昼メニュー画面 -->
-<div id="view-general" class="hidden">
+<div id="view-general" class="view-section hidden">
 <header style="background: rgba(0, 0, 0, 0.35); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
 <h1>メニュー (全て税込)</h1>
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
@@ -72,7 +72,7 @@
 </div>
 
 <!-- 夜メニュー画面 -->
-<div id="view-evening" class="hidden">
+<div id="view-evening" class="view-section hidden">
 <header class="dark" style="background: rgba(18, 22, 28, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
 <h1>18:00以降メニュー(全て税込)</h1>
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
@@ -178,6 +178,11 @@ header.dark .subtitle { color: #e2e8f0; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9
 
 <script>
 function showView(viewName) {
+    // 画面切り替え時にフォーカスを強制的に外し、フォームのスクロール記憶をリセット
+    if (document.activeElement) {
+        document.activeElement.blur();
+    }
+
     document.getElementById('view-home').classList.add('hidden');
     document.getElementById('view-general').classList.add('hidden');
     document.getElementById('view-evening').classList.add('hidden');
@@ -187,10 +192,16 @@ function showView(viewName) {
         targetView.classList.remove('hidden');
     }
     
-    // スクロール位置を確実にトップに戻す
-    window.scrollTo(0, 0);
+    // ウィンドウ全体のスクロールを強制トップに戻す
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+    // Safariの非同期レンダリング対策として微小な遅延を挟んで再度トップへ固定
     setTimeout(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }, 10);
 }
 
