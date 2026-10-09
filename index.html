@@ -178,11 +178,12 @@ header.dark .subtitle { color: #e2e8f0; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9
 
 <script>
 function showView(viewName) {
-    // 画面切り替え時にフォーカスを強制的に外し、フォームのスクロール記憶をリセット
+    // 画面切り替え時に完全にフォーカスを外してブラウザのレイアウト固定を解除
     if (document.activeElement) {
         document.activeElement.blur();
     }
 
+    // すべてのビューを隠す
     document.getElementById('view-home').classList.add('hidden');
     document.getElementById('view-general').classList.add('hidden');
     document.getElementById('view-evening').classList.add('hidden');
@@ -192,17 +193,19 @@ function showView(viewName) {
         targetView.classList.remove('hidden');
     }
     
-    // ウィンドウ全体のスクロールを強制トップに戻す
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // 【重要】iOSブラウザがスライド領域や高さを誤認識するのを防ぐため、
+    // 一瞬だけ body の overflow を hidden にして再描画（レイアウト再計算）を強制する
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 
-    // Safariの非同期レンダリング対策として微小な遅延を挟んで再度トップへ固定
     setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.body.style.overflow = '';
+        window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-    }, 10);
+    }, 50);
 }
 
 function handleInstall() {
