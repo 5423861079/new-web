@@ -62,7 +62,7 @@
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
 </header>
 <main class="card">
-<div class="menu-item"><span>白米(ごはん)</span><span>200円</span></div>
+<div class="menu-item"><span>白米（ごはん）</span><span>200円</span></div>
 <div class="menu-item"><span>ビビンバ</span><span>900円</span></div>
 <div class="menu-item"><span>純豆腐チゲ</span><span>1,300円</span></div>
 <div class="menu-item"><span>韓国海苔5枚</span><span>200円</span></div>
@@ -111,9 +111,6 @@
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html {
-    height: 100%;
-}
 body { 
     font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #333; line-height: 1.6; text-align: center; 
     background-image: url('IMG_5462.jpeg'); 
@@ -181,12 +178,10 @@ header.dark .subtitle { color: #e2e8f0; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9
 
 <script>
 function showView(viewName) {
-    // アクティブな要素（フォームのフォーカスなど）を完全に解除
     if (document.activeElement) {
         document.activeElement.blur();
     }
 
-    // すべてのビューを隠す
     document.getElementById('view-home').classList.add('hidden');
     document.getElementById('view-general').classList.add('hidden');
     document.getElementById('view-evening').classList.add('hidden');
@@ -196,14 +191,13 @@ function showView(viewName) {
         targetView.classList.remove('hidden');
     }
     
-    // スクロール位置とビューポートの高さを強制的にリセット
-    window.scrollTo(0, 0);
+    // 背景やレイアウトを崩さずにスクロール位置だけを完全にトップへ戻す
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 
-    // iOS Safariでのレイアウト崩れ・スクロール固定バグを防ぐための再描画ハック
     setTimeout(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }, 50);
@@ -260,7 +254,6 @@ contactForm.addEventListener('submit', function (e) {
 
     if (!textareaField.value.trim()) {
         if (customError) customError.style.display = 'block';
-        // iOSでレイアウトが狂う原因になる強引なフォーカス移動を抑えつつ、エラーをわかりやすくする
         return;
     } else {
         if (customError) customError.style.display = 'none';
