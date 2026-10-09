@@ -111,6 +111,9 @@
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    height: 100%;
+}
 body { 
     font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #333; line-height: 1.6; text-align: center; 
     background-image: url('IMG_5462.jpeg'); 
@@ -178,7 +181,7 @@ header.dark .subtitle { color: #e2e8f0; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9
 
 <script>
 function showView(viewName) {
-    // 画面切り替え時に完全にフォーカスを外してブラウザのレイアウト固定を解除
+    // アクティブな要素（フォームのフォーカスなど）を完全に解除
     if (document.activeElement) {
         document.activeElement.blur();
     }
@@ -193,15 +196,13 @@ function showView(viewName) {
         targetView.classList.remove('hidden');
     }
     
-    // 【重要】iOSブラウザがスライド領域や高さを誤認識するのを防ぐため、
-    // 一瞬だけ body の overflow を hidden にして再描画（レイアウト再計算）を強制する
-    document.body.style.overflow = 'hidden';
+    // スクロール位置とビューポートの高さを強制的にリセット
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 
+    // iOS Safariでのレイアウト崩れ・スクロール固定バグを防ぐための再描画ハック
     setTimeout(() => {
-        document.body.style.overflow = '';
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
@@ -259,7 +260,7 @@ contactForm.addEventListener('submit', function (e) {
 
     if (!textareaField.value.trim()) {
         if (customError) customError.style.display = 'block';
-        textareaField.focus();
+        // iOSでレイアウトが狂う原因になる強引なフォーカス移動を抑えつつ、エラーをわかりやすくする
         return;
     } else {
         if (customError) customError.style.display = 'none';
