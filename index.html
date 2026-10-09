@@ -16,7 +16,6 @@
 <!-- TOP画面 -->
 <div id="view-home">
 <header style="background: rgba(0, 0, 0, 0.35); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-
 <h1>Nexus</h1>
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
 </header>
@@ -37,7 +36,7 @@
 <tr><th>営業日時</th><td>11:30〜21:30<br>火曜及び祝日定休</td></tr>
 <tr><th>住所</th><td>東京都杉並区天満橋12-9-8</td></tr>
 <tr><th>電話番号</th><td>045-089-2786</td></tr>
-    </table>
+</table>
 </main>
 <main class="card">
 <h2 style="font-size: 1.1rem; text-align: center; margin-bottom: 16px;">お問い合わせ</h2>
@@ -55,10 +54,10 @@
 </form>
 </main>
 </div>
+
 <!-- 昼メニュー画面 -->
 <div id="view-general" class="hidden">
 <header style="background: rgba(0, 0, 0, 0.35); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-
 <h1>メニュー (全て税込)</h1>
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
 </header>
@@ -71,10 +70,10 @@
 <button type="button" class="btn btn-blue" style="margin-top:20px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
 </main>
 </div>
+
 <!-- 夜メニュー画面 -->
 <div id="view-evening" class="hidden">
 <header class="dark" style="background: rgba(18, 22, 28, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-
 <h1>18:00以降メニュー(全て税込)</h1>
 <div class="subtitle">실제 존재하는 매장이 아닙니다.</div>
 </header>
@@ -84,6 +83,7 @@
 <button type="button" class="btn btn-blue" style="margin-top:24px; border-radius:24px;" onclick="showView('home')">ホームへ戻る</button>
 </main>
 </div>
+
 <!-- PWA案内モーダル -->
 <div id="pwaModal" class="modal-overlay hidden">
 <div class="modal-content">
@@ -99,51 +99,207 @@
 <button type="button" class="btn-close" id="closePwaModal">閉じる</button>
 </div>
 </div>
-<!-- ステータスモーダル（送信完了 / オフラインエラー兼用）。 -->
-    <div id="statusModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <div class="modal-title" id="statusModalTitle">送信完了</div>
-            <div class="modal-subtitle" id="statusModalMessage">お問い合わせを受け付けました。</div>
-            <button type="button" class="btn-close" id="closeStatusModal">閉じる</button>
-        </div>
-    </div>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #333; line-height: 1.6; text-align: center; 
-            background-image: url('IMG_5462.jpeg'); 
-            background-repeat: no-repeat;
-            background-size: cover; 
-            background-position: center; 
-            min-height: 100vh; padding-bottom: 40px; 
+
+<!-- ステータスモーダル -->
+<div id="statusModal" class="modal-overlay hidden">
+<div class="modal-content">
+<div class="modal-title" id="statusModalTitle">送信完了</div>
+<div class="modal-subtitle" id="statusModalMessage">お問い合わせを受け付けました。</div>
+<button type="button" class="btn-close" id="closeStatusModal">閉じる</button>
+</div>
+</div>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #333; line-height: 1.6; text-align: center; 
+    background-image: url('IMG_5462.jpeg'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center; 
+    min-height: 100vh; padding-bottom: 40px; 
+}
+header { background: rgba(0, 0, 0, 0.4); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 24px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+header.dark { background: rgba(18, 22, 28, 0.85); color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+header h1 { font-size: 1.35rem; font-weight: 700; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8); }
+header.dark h1 { color: #fff; }
+header .subtitle { font-size: 0.75rem; color: #ffffff; margin-top: 4px; font-weight: 500; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); }
+header.dark .subtitle { color: #e2e8f0; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); }
+
+.card { padding: 28px 20px; max-width: 500px; margin: 24px auto; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); text-align: left; }
+.card.dark { background: rgba(26, 30, 38, 0.72); border: 1px solid rgba(255, 255, 255, 0.12); color: #f0f0f0; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); }
+.btn { display: block; width: 100%; padding: 14px 20px; margin-bottom: 12px; font-size: 1rem; font-weight: bold; text-align: center; text-decoration: none; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; }
+.btn-blue { background: #3b71ca; color: white; }
+.btn-dark { background: #1f2937; color: white; }
+.btn-green { background: #388e3c; color: white; }
+.btn:disabled { background: #94a3b8 !important; color: #f1f5f9 !important; cursor: not-allowed; opacity: 0.8; }
+
+.menu-item { background: rgba(255, 255, 255, 0.82); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); color: #333; }
+.dark .menu-item { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
+.dark .price { color: #60a5fa; }
+.info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
+.info-table th { text-align: left; width: 35%; color: #555; }
+.info-table td { text-align: right; font-weight: bold; }
+.note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
+.hidden { display: none !important; }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+
+.modal-content { 
+    background: #ffffff; 
+    border-radius: 24px; 
+    padding: 32px 24px 24px 24px; 
+    max-width: 360px; 
+    width: 100%; 
+    text-align: center; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    animation: floatUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+
+@keyframes floatUp { 
+    from { opacity: 0; transform: translateY(20px) scale(0.96); } 
+    to { opacity: 1; transform: translateY(0) scale(1); } 
+}
+
+.app-icon { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.modal-title { font-size: 1.25rem; font-weight: bold; color: #1e293b; margin-bottom: 6px; }
+.modal-subtitle { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; }
+.guide-list { text-align: left; font-size: 0.88rem; color: #334155; line-height: 1.7; margin-bottom: 24px; }
+.guide-list ol { padding-left: 0; list-style-position: inside; }
+.guide-list li { margin-bottom: 8px; }
+.btn-close { background: #f1f5f9; color: #475569; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+.btn-close:active { background: #e2e8f0; }
+.form-group { margin-bottom: 16px; text-align: left; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 6px; }
+.form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; font-size: 0.95rem; font-family: inherit; background: rgba(255,255,255,0.7); }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #3b71ca; background: rgba(255,255,255,1); }
+.required-badge { background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+</style>
+
+<script>
+function showView(viewName) {
+    document.getElementById('view-home').classList.add('hidden');
+    document.getElementById('view-general').classList.add('hidden');
+    document.getElementById('view-evening').classList.add('hidden');
+
+    const targetView = document.getElementById('view-' + viewName);
+    if (targetView) {
+        targetView.classList.remove('hidden');
+    }
+    
+    // スクロール位置を確実にトップに戻す
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 10);
+}
+
+function handleInstall() {
+    document.getElementById('pwaModal').classList.remove('hidden');
+}
+
+function updateNetworkStatus() {
+    const submitBtn = document.getElementById('submitBtn');
+    if (!submitBtn) return;
+
+    if (navigator.onLine) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = '送信する';
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'オフラインのため送信不可';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pwaModal = document.getElementById('pwaModal');
+    const closePwaModalBtn = document.getElementById('closePwaModal');
+
+    closePwaModalBtn.addEventListener('click', () => {
+        pwaModal.classList.add('hidden');
+    });
+
+    pwaModal.addEventListener('click', (e) => {
+        if (e.target === pwaModal) {
+            pwaModal.classList.add('hidden');
         }
-        header { background: rgba(0, 0, 0, 0.4); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 24px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
-        header.dark { background: rgba(18, 22, 28, 0.85); color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        header h1 { font-size: 1.35rem; font-weight: 700; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8); }
-        header.dark h1 { color: #fff; }
-        header .subtitle { font-size: 0.75rem; color: #ffffff; margin-top: 4px; font-weight: 500; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); }
-        header.dark .subtitle { color: #e2e8f0; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); }
+    });
 
-        .card { padding: 28px 20px; max-width: 500px; margin: 24px auto; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); text-align: left; }
-        .card.dark { background: rgba(26, 30, 38, 0.72); border: 1px solid rgba(255, 255, 255, 0.12); color: #f0f0f0; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); }
-        .btn { display: block; width: 100%; padding: 14px 20px; margin-bottom: 12px; font-size: 1rem; font-weight: bold; text-align: center; text-decoration: none; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; }
-        .btn-blue { background: #3b71ca; color: white; }
-        .btn-dark { background: #1f2937; color: white; }
-        .btn-green { background: #388e3c; color: white; }
-        /* オフライン時・送信中のボタン無効化スタイル。 */
-        .btn:disabled { background: #94a3b8 !important; color: #f1f5f9 !important; cursor: not-allowed; opacity: 0.8; }
-        
-        .menu-item { background: rgba(255, 255, 255, 0.82); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); color: #333; }
-        .dark .menu-item { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
-        .dark .price { color: #60a5fa; }
-        .info-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-        .info-table th, .info-table td { padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); font-size: 0.95rem; }
-        .info-table th { text-align: left; width: 35%; color: #555; }
-        .info-table td { text-align: right; font-weight: bold; }
-        .note { font-size: 0.9rem; color: #a0aec0; margin-top: 16px; text-align: center; }
-        .hidden { display: none !important; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        
-        /* ゆっくり下からふわっと浮上するアニメーション（0.4秒）。 */
-        .modal-content
+    updateNetworkStatus();
+});
 
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
+
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusModal = document.getElementById('statusModal');
+const statusModalTitle = document.getElementById('statusModalTitle');
+const statusModalMessage = document.getElementById('statusModalMessage');
+const closeStatusModalBtn = document.getElementById('closeStatusModal');
+const textareaField = contactForm.querySelector('textarea[name="お問い合わせ内容"]');
+const customError = document.getElementById('customError');
+
+contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!textareaField.value.trim()) {
+        if (customError) customError.style.display = 'block';
+        textareaField.focus();
+        return;
+    } else {
+        if (customError) customError.style.display = 'none';
+    }
+
+    if (!navigator.onLine) {
+        statusModalTitle.innerText = "送信エラー。";
+        statusModalMessage.innerText = "オフラインのため送信できません。ネットワーク接続を確認してください。";
+        statusModal.classList.remove('hidden');
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = '送信中...';
+
+    setTimeout(() => {
+        contactForm.reset();
+        if (customError) customError.style.display = 'none';
+        
+        statusModalTitle.innerText = "送信完了";
+        statusModalMessage.innerText = "お問い合わせを受け付けました。";
+        statusModal.classList.remove('hidden');
+
+        updateNetworkStatus();
+    }, 1000);
+});
+
+if (textareaField) {
+    textareaField.addEventListener('input', () => {
+        if (textareaField.value.trim() && customError) {
+            customError.style.display = 'none';
+        }
+    });
+}
+
+closeStatusModalBtn.addEventListener('click', () => {
+    statusModal.classList.add('hidden');
+});
+
+statusModal.addEventListener('click', (e) => {
+    if (e.target === statusModal) {
+        statusModal.classList.add('hidden');
+    }
+});
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+            console.log('Service Worker 登録成功:', reg.scope);
+        }).catch((err) => {
+            console.log('Service Worker 登録失敗:', err);
+        });
+    });
+}
+</script>
+</body>
+</html>
