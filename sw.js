@@ -1,11 +1,12 @@
-const CACHE_NAME = 'nexus-cache-v1';
+const CACHE_NAME = 'nexus-cache-v2';
 
 // オフラインで保存するファイル一覧
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './IMG_3693.jpeg'
+  './IMG_3693.jpeg',
+  './IMG_5462.jpeg'
 ];
 
 // インストール時にキャッシュに保存
@@ -34,7 +35,7 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
-// リクエスト時にキャッシュからファイルを返す（背景画像もここから読み込まれます）
+// リクエスト時にキャッシュからファイルを返す
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((response) => {
